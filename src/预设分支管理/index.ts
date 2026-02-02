@@ -2,6 +2,7 @@ import { createScriptIdDiv, teleportStyle } from '@util/script';
 import $ from 'jquery';
 import _ from 'lodash';
 import { createPinia } from 'pinia';
+import toastr from 'toastr';
 import { createApp, ref } from 'vue';
 import DeleteBranchModal from './DeleteBranchModal.vue';
 import EditPromptsModal from './EditPromptsModal.vue';
@@ -290,7 +291,7 @@ async function init() {
   app.use(pinia);
 
   // 创建挂载容器并复制样式到酒馆页面
-  const destroyStyle = teleportStyle();
+  const { destroy: destroyStyle } = teleportStyle();
 
   // 创建挂载位置
   const $app = createScriptIdDiv().appendTo('body');

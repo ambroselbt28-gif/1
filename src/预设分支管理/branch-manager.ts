@@ -282,6 +282,18 @@ export function extractPromptsEnabledState(): PromptEnabledState {
 }
 
 /**
+ * 获取当前加载的预设名称
+ */
+export function getCurrentPresetName(): string {
+  try {
+    return getLoadedPresetName();
+  } catch (error) {
+    console.error('获取当前预设名称失败:', error);
+    return '';
+  }
+}
+
+/**
  * 获取所有预设列表
  */
 export async function getPresetList(): Promise<string[]> {

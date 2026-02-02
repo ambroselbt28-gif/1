@@ -90,7 +90,7 @@
   <!-- 桌面端：悬浮窗 -->
   <div v-else
        id="preset-branch-float"
-       class="fixed z-50 w-80 bg-white rounded-lg shadow-xl border bg-opacity-95 backdrop-blur-sm"
+       class="fixed z-50 w-80 bg-white rounded-lg shadow-xl border border-gray-200"
        style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
     <!-- 折叠状态 -->
     <div v-if="!isExpanded"
@@ -182,8 +182,9 @@
 import { useBreakpoints } from '@vueuse/core';
 import $ from 'jquery';
 import 'jquery-ui';
+import toastr from 'toastr';
 import { nextTick, onMounted, ref } from 'vue';
-import { getActiveBranchName, getBranchList, getPresetList, switchBranch } from './branch-manager';
+import { getActiveBranchName, getBranchList, getCurrentPresetName, getPresetList, switchBranch } from './branch-manager';
 import { BranchListItem } from './types';
 
 const emit = defineEmits<{
@@ -225,7 +226,7 @@ function initDraggable() {
   $float.draggable({
     handle: dragHandle.value,
     containment: 'window',
-    stop: (_event, ui) => {
+    stop: (_event: any, ui: any) => {
       localStorage.setItem(
         'preset-branch-position',
         JSON.stringify({ left: ui.position.left, top: ui.position.top })
@@ -257,7 +258,7 @@ async function loadPresetNames() {
 
 async function loadCurrentPreset() {
   try {
-    const currentPresetName = getLoadedPresetName();
+    const currentPresetName = getCurrentPresetName();
     if (currentPresetName) {
       selectedPreset.value = currentPresetName;
       await loadBranches(selectedPreset.value);
