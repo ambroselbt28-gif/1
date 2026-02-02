@@ -196,7 +196,7 @@ const breakpoints = useBreakpoints({
 });
 
 const isMobile = breakpoints.smaller('mobile');
-const isExpanded = ref(false);
+const isExpanded = ref(true);
 const dragHandle = ref<HTMLElement | null>(null);
 
 // 预设和分支数据
