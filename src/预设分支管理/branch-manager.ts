@@ -1,3 +1,4 @@
+import { getPresetNames } from '@types/function/preset';
 import { BranchData, BranchListItem, PresetBranches, PresetBranchesStorage, PresetPrompt, PromptEnabledState } from './types';
 
 // 脚本变量存储键
