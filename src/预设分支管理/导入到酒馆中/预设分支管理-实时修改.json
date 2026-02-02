@@ -1,0 +1,7 @@
+{
+    "id": "preset-branch-manager-uuid",
+    "name": "预设分支管理",
+    "content": "import 'http://localhost:5500/dist/预设分支管理/index.js'",
+    "info": "为预设系统添加分支功能，允许用户为同一个预设保存多个不同的提示词开关配置，便于在不同场景间快速切换。支持桌面端和移动端。",
+    "buttons": []
+}
