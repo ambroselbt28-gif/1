@@ -90,7 +90,8 @@
   <!-- 桌面端：悬浮窗 -->
   <div v-else
        id="preset-branch-float"
-       class="fixed z-50 w-80 bg-white rounded-lg shadow-xl border bg-opacity-95 backdrop-blur-sm">
+       class="fixed z-50 w-80 bg-white rounded-lg shadow-xl border bg-opacity-95 backdrop-blur-sm"
+       style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
     <!-- 折叠状态 -->
     <div v-if="!isExpanded"
          class="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-50"
