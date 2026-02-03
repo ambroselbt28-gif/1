@@ -1,9 +1,28 @@
-import { createScriptIdIframe, teleportStyle } from '@util/script';
+import { teleportStyle } from '@util/script';
 import $ from 'jquery';
 import _ from 'lodash';
 import { createPinia } from 'pinia';
 import toastr from 'toastr';
 import { createApp, ref } from 'vue';
+
+// 自定义 iframe srcdoc，不包含 adjust_iframe_height.js 以避免 jQuery 加载时序问题
+const customSrcdoc = `<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://testingcf.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+<script src="https://testingcf.jsdelivr.net/gh/n0vi028/JS-Slash-Runner/lib/tailwindcss.min.js"><\/script>
+<script src="https://testingcf.jsdelivr.net/npm/jquery"><\/script>
+<script src="https://testingcf.jsdelivr.net/npm/jquery-ui/dist/jquery-ui.min.js"><\/script>
+<link rel="stylesheet" href="https://testingcf.jsdelivr.net/npm/jquery-ui/themes/base/theme.min.css" />
+<script src="https://testingcf.jsdelivr.net/npm/jquery-ui-touch-punch"><\/script>
+<script src="https://testingcf.jsdelivr.net/npm/lodash"><\/script>
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0!important;padding:0;overflow:hidden!important;max-width:100%!important;}
+</style>
+</head>
+<body></body>
+</html>`;
 import DeleteBranchModal from './DeleteBranchModal.vue';
 import EditPromptsModal from './EditPromptsModal.vue';
 import FloatingWindow from './FloatingWindow.vue';
@@ -291,7 +310,12 @@ async function init() {
   app.use(pinia);
 
   // 创建 iframe 并设置样式（悬浮窗居中显示）
-  const $app = createScriptIdIframe()
+  const $app = $<HTMLIFrameElement>('<iframe>')
+    .attr({
+      script_id: getScriptId(),
+      frameborder: '0',
+      srcdoc: customSrcdoc,
+    })
     .css({
       position: 'fixed',
       top: '50%',
@@ -307,8 +331,8 @@ async function init() {
       pointerEvents: 'auto',
     })
     .appendTo('body')
-    .on('load', function () {
-      const iframe = this as HTMLIFrameElement;
+    .on('load', function (this: HTMLIFrameElement) {
+      const iframe = this;
       const iframeDoc = iframe.contentDocument!;
 
       // 复制样式到 iframe
