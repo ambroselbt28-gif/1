@@ -1,4 +1,4 @@
-import { createScriptIdDiv, teleportStyle } from '@util/script';
+import { createScriptIdIframe, teleportStyle } from '@util/script';
 import $ from 'jquery';
 import _ from 'lodash';
 import { createPinia } from 'pinia';
@@ -290,23 +290,41 @@ async function init() {
   const pinia = createPinia();
   app.use(pinia);
 
-  // 创建挂载容器并复制样式到酒馆页面
-  const { destroy: destroyStyle } = teleportStyle();
+  // 创建 iframe 并设置样式（悬浮窗居中显示）
+  const $app = createScriptIdIframe()
+    .css({
+      position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '320px',
+      height: 'auto',
+      minHeight: '60px',
+      maxHeight: '80vh',
+      border: 'none',
+      zIndex: 9999,
+      background: 'transparent',
+      pointerEvents: 'auto',
+    })
+    .appendTo('body')
+    .on('load', function () {
+      const iframe = this as HTMLIFrameElement;
+      const iframeDoc = iframe.contentDocument!;
 
-  // 创建挂载位置
-  const $app = createScriptIdDiv().appendTo('body');
+      // 复制样式到 iframe
+      teleportStyle(iframeDoc.head);
 
-  // 挂载 Vue 应用
-  app.mount($app[0]);
+      // 挂载 Vue 应用到 iframe 内部
+      app.mount(iframeDoc.body);
 
-  console.info('[预设分支管理] 脚本初始化完成');
-  toastr.success('预设分支管理已加载');
+      console.info('[预设分支管理] 脚本初始化完成');
+      toastr.success('预设分支管理已加载');
+    });
 
   // 页面卸载时清理
   $(window).on('pagehide', () => {
     app.unmount();
     $app.remove();
-    destroyStyle();
     console.info('[预设分支管理] 脚本已卸载');
   });
 }
