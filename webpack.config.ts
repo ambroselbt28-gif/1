@@ -51,7 +51,11 @@ function common_path(lhs: string, rhs: string) {
 function glob_script_files() {
   const results: string[] = [];
 
+<<<<<<< HEAD
   fs.globSync(`src/**/index.{ts,tsx,js,jsx}`)
+=======
+  fs.globSync(`{示例,src}/**/index.{ts,tsx,js,jsx}`)
+>>>>>>> f0b81694107b46de13c384cb766919135218501f
     .filter(
       file => process.env.CI !== 'true' || !fs.readFileSync(path.join(import.meta.dirname, file)).includes('@no-ci'),
     )
@@ -539,7 +543,11 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       }
 
       if (
+<<<<<<< HEAD
         ['vue', 'vue-router', 'pixi.js'].every(key => request !== key) &&
+=======
+        ['vue', 'vue-router'].every(key => request !== key) &&
+>>>>>>> f0b81694107b46de13c384cb766919135218501f
         ['pixi', 'react', 'vue'].some(key => request.includes(key))
       ) {
         return callback();
@@ -553,7 +561,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         'vue-router': 'VueRouter',
         yaml: 'YAML',
         zod: 'z',
+<<<<<<< HEAD
         'pixi.js': 'PIXI',
+=======
+>>>>>>> f0b81694107b46de13c384cb766919135218501f
       };
       if (request in global) {
         return callback(null, 'var ' + global[request as keyof typeof global]);
