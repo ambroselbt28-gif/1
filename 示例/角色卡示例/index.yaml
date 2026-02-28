@@ -1,8 +1,14 @@
 # yaml-language-server: $schema=https://testingcf.jsdelivr.net/gh/StageDog/tavern_sync/dist/schema/character.zh.json
 头像: 头像
+<<<<<<< HEAD
 版本: ''
 作者: 青空莉想做舞台少女的狗
 备注: ''
+=======
+版本: 1.0.0
+作者: 青空莉想做舞台少女的狗
+备注: '青空莉导航站: https://stagedog.github.io/'
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
 
 第一条消息:
   - 文件: 第一条消息/0
@@ -190,7 +196,11 @@
       id: 2d2018ae-c085-4916-af05-6830110a8293
       启用: true
       查找表达式: /<update(?:variable)?>(?:(?!.*<\/update(?:variable)?>).*$|.*<\/update(?:variable)?>)/gsi
+<<<<<<< HEAD
       替换为: ''
+=======
+      内容: ''
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
       来源:
         用户输入: true
         AI输出: true
@@ -203,7 +213,11 @@
       id: ea96523f-a1cc-4634-b9d2-f28531adca6c
       启用: true
       查找表达式: /<update(?:variable)?>(?!.*<\/update(?:variable)?>)\s*(.*)\s*$/gsi
+<<<<<<< HEAD
       替换为: |-
+=======
+      内容: |-
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
 
         <details>
         <summary>变量更新中{{random::.::..::...}}</summary>
@@ -220,7 +234,11 @@
       id: 06dec31f-c0a9-456c-8b88-1f9176a73039
       启用: true
       查找表达式: /<update(?:variable)?>\s*(.*)\s*<\/update(?:variable)?>/gsi
+<<<<<<< HEAD
       替换为: |-
+=======
+      内容: |-
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
 
         <details>
         <summary>变量更新情况</summary>
@@ -237,7 +255,11 @@
       id: 65bd44f0-0098-4d54-a07d-9deced287d96
       启用: false
       查找表达式: <StatusPlaceHolderImpl/>
+<<<<<<< HEAD
       替换为: |-
+=======
+      内容: |-
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
         <style>
         /* 在这里写你的CSS样式 */
         .status-bar {
@@ -262,7 +284,11 @@
       id: b50d0bed-ff40-4a25-9ada-14feb4283324
       启用: true
       查找表达式: <StatusPlaceHolderImpl/>
+<<<<<<< HEAD
       替换为: |-
+=======
+      内容: |-
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
         ```
         <body>
         <script>
@@ -299,3 +325,17 @@
         类型: 脚本
         内容: |-
           import 'https://testingcf.jsdelivr.net/gh/StageDog/tavern_helper_template/dist/角色卡示例/脚本/立即事件/index.js';
+<<<<<<< HEAD
+=======
+
+      - 名称: 自动更新角色卡
+        id: 176b0b3c-b410-4373-8c81-8636a94a0839
+        启用: true
+        类型: 脚本
+        内容: |-
+          import 'https://testingcf.jsdelivr.net/gh/StageDog/tavern_resource/dist/酒馆助手/自动更新角色卡/index.js';
+        数据:
+          角色卡名称: 呕吐内心的少女
+          角色卡链接: https://testingcf.jsdelivr.net/gh/StageDog/tavern_helper_template/示例/角色卡示例/角色卡示例.png
+          更新日志链接: https://testingcf.jsdelivr.net/gh/StageDog/tavern_helper_template/示例/角色卡示例/更新日志.md
+>>>>>>> a9c3922bae77d94f729a544a1b3053ac46d6c121
