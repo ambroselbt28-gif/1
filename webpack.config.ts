@@ -51,7 +51,11 @@ function common_path(lhs: string, rhs: string) {
 function glob_script_files() {
   const results: string[] = [];
 
+<<<<<<< HEAD
   fs.globSync(`src/**/index.{ts,tsx,js,jsx}`)
+=======
+  fs.globSync(`{示例,src}/**/index.{ts,tsx,js,jsx}`)
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
     .filter(
       file => process.env.CI !== 'true' || !fs.readFileSync(path.join(import.meta.dirname, file)).includes('@no-ci'),
     )
@@ -97,7 +101,11 @@ function watch_tavern_helper(compiler: webpack.Compiler) {
 
     compiler.hooks.done.tap('watch_tavern_helper', () => {
       console.info('\n\x1b[36m[tavern_helper]\x1b[0m 检测到完成编译, 推送更新事件...');
+<<<<<<< HEAD
       if (compiler.options.plugins.find(plugin => plugin instanceof HtmlWebpackPlugin)) {
+=======
+      if (compiler.options.plugins.some(plugin => plugin instanceof HtmlWebpackPlugin)) {
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
         io.emit('message_iframe_updated');
       } else {
         io.emit('script_iframe_updated');
@@ -452,6 +460,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
             { from: 'klona', imports: ['klona'] },
             { from: 'vue-final-modal', imports: ['useModal'] },
             { from: 'zod', imports: ['z'] },
+<<<<<<< HEAD
+=======
+            { from: 'type-fest', imports: [['*', 'TypeFest']], type: true },
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
           ],
         }),
         unpluginVueComponents({
@@ -539,7 +551,11 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       }
 
       if (
+<<<<<<< HEAD
         ['vue', 'vue-router', 'pixi.js'].every(key => request !== key) &&
+=======
+        ['vue', 'vue-router'].every(key => request !== key) &&
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
         ['pixi', 'react', 'vue'].some(key => request.includes(key))
       ) {
         return callback();
@@ -553,7 +569,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         'vue-router': 'VueRouter',
         yaml: 'YAML',
         zod: 'z',
+<<<<<<< HEAD
         'pixi.js': 'PIXI',
+=======
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
       };
       if (request in global) {
         return callback(null, 'var ' + global[request as keyof typeof global]);
@@ -561,9 +580,23 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       const cdn = {
         sass: 'https://jspm.dev/sass',
       };
+<<<<<<< HEAD
       return callback(
         null,
         'module-import ' + (cdn[request as keyof typeof cdn] ?? `https://testingcf.jsdelivr.net/npm/${request}/+esm`),
+=======
+      const package_json = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, 'package.json'), 'utf-8')) as {
+        dependencies?: Record<string, string>;
+        devDependencies?: Record<string, string>;
+      };
+      const package_versions = { ...package_json.devDependencies, ...package_json.dependencies };
+      const version = package_versions[request]?.replace(/^[~^]/, '');
+      const versioned_request = /^[.\d]+$/.test(version) ? `${request}@${version}` : request;
+      return callback(
+        null,
+        'module-import ' +
+          (cdn[request as keyof typeof cdn] ?? `https://testingcf.jsdelivr.net/npm/${versioned_request}/+esm`),
+>>>>>>> c27dc311feeca88f575184c70cd539091ffeaf47
       );
     },
   });
